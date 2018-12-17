@@ -6,7 +6,8 @@ class App extends React.Component {
         super(props)
         this.state = {
             cells : Array(81).fill(null),
-            board : Array(9).fill(null),
+            board : Array(81).fill(null),
+            biggerBox : Array(9).fill(null),
 
             player : "X",
             winner : null
@@ -47,34 +48,26 @@ class App extends React.Component {
             })
 
         }
-        this.checkWinner()
+        // this.checkWinner()
     }
     render() {
-        const Box = this.state.board.map(
-            () =>  
-                <div className="biggerBox">
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
-                </div>
-        )
-        const Cells = this.state.cells.map(
-            () =>
-                <div className="box">
+        const Cells = this.state.board.map(
+            (box, index) =>
+                <div className="box"
+                key ={index}
+                onClick={() => this.handleClick(index)}>
+                {box}
                 </div>
         )
         
 
        return (
-           <div className="board">
-                {Box}
-           </div>
+           <div className="title">
+                <h1>Sudoku</h1>
+                <div className="board">
+                    {Cells}
+                </div>
+            </div>
         );
     }
 }
